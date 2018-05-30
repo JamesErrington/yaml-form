@@ -1,0 +1,30 @@
+{
+  "name": "yaml-form",
+  "version": "0.0.1",
+  "description": "Create form html from yaml configs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "run": "node .\\dist\\index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesErrington/yaml-form.git"
+  },
+  "author": "James Errington",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamesErrington/yaml-form/issues"
+  },
+  "homepage": "https://github.com/JamesErrington/yaml-form#readme",
+  "devDependencies": {
+    "@types/js-yaml": "3.11.1",
+    "@types/node": "10.1.4",
+    "typescript": "2.8.3"
+  },
+  "dependencies": {
+    "js-yaml": "3.11.0"
+  }
+}

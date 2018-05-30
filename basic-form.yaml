@@ -1,0 +1,16 @@
+meta:
+  action: /action.php
+  target: _self
+  method: get
+body:
+  - element:
+      tag: input
+      type: text
+      name: firstname
+      label: true
+  - element:
+      tag: input
+      type: text
+      name: lastname
+      label: true
+      
