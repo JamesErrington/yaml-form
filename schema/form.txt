@@ -1,0 +1,13 @@
+form-meta:
+  accept-charset: string
+  action *:       string
+  autocomplete:   "on" | "off"
+  enctype:        "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain"
+  method *:       "get" | "post"
+  name:           string
+  novalidate:     boolean
+  target:         "_self" | "_blank" | "_parent" | "_top" | string
+
+
+form:
+  form-meta

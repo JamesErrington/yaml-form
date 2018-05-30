@@ -1,16 +1,10 @@
-meta:
-  action: /action.php
-  target: _self
-  method: get
-body:
-  - element:
-      tag: input
-      type: text
-      name: firstname
-      label: true
-  - element:
-      tag: input
-      type: text
-      name: lastname
-      label: true
-      
+form:
+  form_meta:
+    #accept_charset: "utf-8"
+    action: "action.php"
+    #autocomplete: "on"
+    #enctype: "application/x-www-form-urlencoded"
+    method: "get"
+    name: "form"
+    #novalidate: false
+    target: "_self"

@@ -9,28 +9,52 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var yaml_parse = __importStar(require("js-yaml"));
 var fs = __importStar(require("fs"));
-function convert(file) {
+function getSchema(path) {
+    var file = yaml_parse.safeLoad(fs.readFileSync(path, 'utf-8'));
+    return convertToSchema(file);
+}
+function getConfig(path) {
+    var file = yaml_parse.safeLoad(fs.readFileSync(path, 'utf-8'));
+    return convertToConfig(file);
+}
+function getFormDef(path) {
+    var file = yaml_parse.safeLoad(fs.readFileSync(path, 'utf-8'));
+    return convertToFormDef(file);
+}
+function convertToFormDef(file) {
     return JSON.parse(JSON.stringify(file));
 }
-function makeForm(form_def) {
-    var html = "<form action=\"" + form_def.meta.action + "\" target=\"" + form_def.meta.target + "\" method=\"" + form_def.meta.method + "\">\n";
-    for (var _i = 0, _a = form_def.body; _i < _a.length; _i++) {
-        var element = _a[_i];
-        if (element.element.label) {
-            html += "\t<label for=\"" + element.element.name + "\">" + element.element.name + "</label>\n";
-        }
-        html += "\t<" + element.element.tag + " type=\"" + element.element.type + "\" name=\"" + element.element.name + "\">\n";
-    }
-    html += "</form>\n";
+function convertToConfig(file) {
+    return JSON.parse(JSON.stringify(file));
+}
+function convertToSchema(file) {
+    return JSON.parse(JSON.stringify(file));
+}
+function writeHTML(html) {
     fs.writeFileSync('basic-form.html', html, {
         encoding: 'utf-8'
     });
 }
-try {
-    var file = yaml_parse.safeLoad(fs.readFileSync('./basic-form.yaml', 'utf-8'));
-    var form_def = convert(file);
-    makeForm(form_def);
+function makeMeta(meta_schema, meta_def) {
+    var string = '';
+    for (var _i = 0, meta_schema_1 = meta_schema; _i < meta_schema_1.length; _i++) {
+        var attribute = meta_schema_1[_i];
+        var value = meta_def[attribute];
+        if (value) {
+            string += " " + attribute.replace('_', '-') + "=\"" + value + "\"";
+        }
+        else if (config.required.form[attribute]) {
+            console.error("Undefined required attribute '" + attribute + "'");
+        }
+    }
+    return string;
 }
-catch (error) {
-    console.error(error);
+function makeForm(form_def) {
+    var metaString = makeMeta(schema.form.form_meta, form_def.form.form_meta);
+    var html = "<form" + metaString + ">\n\n</form>";
+    writeHTML(html);
 }
+var schema = getSchema('formschema.yaml');
+var config = getConfig('./yamlform.config.yaml');
+var formDef = getFormDef('./basic-form.yaml');
+makeForm(formDef);
