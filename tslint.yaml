@@ -1,0 +1,8 @@
+---
+extends: 'tslint:recommended'
+rules:
+  quotemark: [true, 'single']
+  no-console: false
+  trailing-comma: [true, {'multiline': 'never', 'singleline': 'never'}]
+  whitespace: [true, 'check-decl', 'check-operator', 'check-module', 'check-separator', 'check-rest-spread', 'check-type-operator', 'check-preblock']
+...

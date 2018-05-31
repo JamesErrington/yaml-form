@@ -1,62 +1,65 @@
-import * as yaml_parse from 'js-yaml';
-import * as fs from 'fs';
+import { makeMeta } from './html';
 
-interface FormSchema {
+// import * as fs from 'fs';
+// import * as yamlParse from 'js-yaml';
+/*
+
+interface IFormSchema {
   form : {
     form_meta : string[]
-  }
+  };
 }
 
-interface Config {
+interface IConfig {
   required : {
     form : {
-      [action : string] : boolean,
+      [action : string] : boolean
       method : boolean
-    }
-  }
+    };
+  };
 }
 
-interface FormMeta {
-  [accept_charset : string] : string,
-  action : string,
-  autocomplete : string,
-  enctype : string,
-  method : string,
-  name : string,
-  novalidate : string,
+interface IFormMeta {
+  [accept_charset : string] : string
+  action : string
+  autocomplete : string
+  enctype : string
+  method : string
+  name : string
+  novalidate : string
   target : string
 }
 
-interface FormDef {
+interface IFormDef {
   form : {
-    form_meta: FormMeta
-  }
+    form_meta: IFormMeta;
+  };
 }
 
-function getSchema(path : string) : FormSchema {
-  const file = yaml_parse.safeLoad(fs.readFileSync(path, 'utf-8'));
+function getSchema(path : string) : IFormSchema {
+  const file = yamlParse.safeLoad(fs.readFileSync(path, 'utf-8'));
   return convertToSchema(file);
 }
 
-function getConfig(path : string) : Config {
-  const file = yaml_parse.safeLoad(fs.readFileSync(path, 'utf-8'));
+function getConfig(path : string) : IConfig {
+  const file = yamlParse.safeLoad(fs.readFileSync(path, 'utf-8'));
   return convertToConfig(file);
 }
 
-function getFormDef(path : string) : FormDef {
-  const file = yaml_parse.safeLoad(fs.readFileSync(path, 'utf-8'));
+function getFormDef(path : string) : IFormDef {
+  const file = yamlParse.safeLoad(fs.readFileSync(path, 'utf-8'));
   return convertToFormDef(file);
 }
 
-function convertToFormDef(file : yaml_parse.DocumentLoadResult) : FormDef {
+function convertToFormDef(file : yamlParse.DocumentLoadResult) : IFormDef {
   return JSON.parse(JSON.stringify(file));
 }
 
-function convertToConfig(file : yaml_parse.DocumentLoadResult) : Config {
+function convertToConfig(file : yamlParse.DocumentLoadResult) : IConfig {
   return JSON.parse(JSON.stringify(file));
 }
 
-function convertToSchema(file : yaml_parse.DocumentLoadResult) : FormSchema {
+function convertToSchema(file : yamlParse.DocumentLoadResult) : IFormSchema {
   return JSON.parse(JSON.stringify(file));
 }
 
@@ -66,9 +69,9 @@ function writeHTML(html : string) : void {
   });
 }
 
-function makeMeta(meta_schema : string[], meta_def : FormMeta) : string {
+function makeMeta(meta_schema : string[], meta_def : IFormMeta) : string {
   let string = '';
-  for(let attribute of meta_schema) {
+  for(const attribute of meta_schema) {
     const value = meta_def[attribute];
     if(value) {
       string += ` ${attribute.replace('_', '-')}="${value}"`;
@@ -79,16 +82,18 @@ function makeMeta(meta_schema : string[], meta_def : FormMeta) : string {
   return string;
 }
 
-function makeForm(form_def : FormDef) : void {
+function makeForm(form_def : IFormDef) : void {
   const metaString = makeMeta(schema.form.form_meta, form_def.form.form_meta);
-  let html = `<form${metaString}>\n\n</form>`;
+  const html = `<form${metaString}>\n\n</form>`;
+  console.log(html);
   writeHTML(html);
 }
 
-const schema = getSchema('formschema.yaml');
+const schema = getSchema('./schema/formschema.yaml');
 
 const config = getConfig('./yamlform.config.yaml');
 
 const formDef = getFormDef('./basic-form.yaml');
 
 makeForm(formDef);
+*/
