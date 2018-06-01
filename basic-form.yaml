@@ -15,3 +15,8 @@ body:
     pattern: \[A-Z\]\* 
     placeholder: Uppercase only
     required: yes
+  - id: radio-group
+    type: radio
+    choices: 
+      - label: 'Option 1'
+        value: ''

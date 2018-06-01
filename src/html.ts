@@ -35,6 +35,17 @@ function makeInputTag(definition : ITextInputElement) : string {
   return html;
 }
 
+function makeRadioGroup(definition : IRadioGroup) : string {
+  let html = definition.id ? `<div id="${definition.id}">\n` : '<div>\n';
+  for(const choice of definition.choices) {
+    html += `\t<input id="${choice.id}" name="${definition.name}" type="${definition.type}" value="${choice.value}">\n`;
+    html += `\t<label for="${choice.id}">${choice.label}</label>\n`;
+  }
+  html += `</div>`;
+
+  return html;
+}
+
 function makeForm(definition : IForm) : string {
   let html = '';
   html += makeFormTag(definition.form_meta);
@@ -45,4 +56,4 @@ function makeForm(definition : IForm) : string {
   return html;
 }
 
-export { makeAttributeString, makeFormTag, makeInputTag, makeForm };
+export { makeAttributeString, makeFormTag, makeInputTag, makeRadioGroup, makeForm };

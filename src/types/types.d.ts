@@ -36,6 +36,19 @@ declare interface ITextInputElement extends IInputElement {
   label? : string
 }
 
+declare interface IRadioGroup {
+  id? : string
+  name : string
+  type : string
+  choices : IRadioChoices[]
+}
+
+declare interface IRadioChoices {
+  id : string
+  label : string
+  value : string
+}
+
 declare interface IConfig {
   required : {
     form : string[]

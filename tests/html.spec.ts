@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
-import { makeAttributeString, makeForm, makeFormTag, makeInputTag } from '../src/html';
+import { makeAttributeString, makeForm, makeFormTag, makeInputTag, makeRadioGroup } from '../src/html';
 
 const globalSchema = ['id', 'name', 'class'];
 const formMetaSchema = ['accept_charset', 'action', 'autocomplete', 'enctype', 'method', 'novalidate', 'target'];
@@ -125,6 +125,33 @@ describe('makeInputTag()', () => {
       };
 
       expect(() => makeInputTag(definition)).to.throw(`<input> must have attribute 'id' to add <label>`);
+    });
+  });
+});
+
+describe('makeRadioGroup()', () => {
+  describe('Make a group of radio buttons with labels', () => {
+    it('should return a string of a html radio button group with labels as defined oin the given definition', () => {
+      const definition = {
+        id: 'radio-group',
+        name: 'options',
+        type: 'radio',
+        choices: [{
+          id: 'option-one',
+          label: 'Option 1',
+          value: 'one'
+        }, {
+          id: 'option-two',
+          label: 'Option 2',
+          value: 'two'
+        }]
+      };
+      const result = makeRadioGroup(definition);
+      const expected = '<div id="radio-group">\n\t<input id="option-one" name="options" type="radio" value="one">\n' +
+        '\t<label for="option-one">Option 1</label>\n\t<input id="option-two" name="options" type="radio" value="two">\n' +
+        '\t<label for="option-two">Option 2</label>\n</div>';
+
+      expect(result).to.equal(expected);
     });
   });
 });
