@@ -1,10 +1,17 @@
-form:
-  form_meta:
-    #accept_charset: "utf-8"
-    action: "action.php"
-    #autocomplete: "on"
-    #enctype: "application/x-www-form-urlencoded"
-    method: "get"
-    name: "form"
-    #novalidate: false
-    target: "_self"
+form_meta:
+  action: "action.php"
+  method: "get"
+  name: "form"
+  target: "_self"
+body:
+  - id: lowercase
+    type: text 
+    pattern: \[a-z\]\* 
+    placeholder: Lowercase only
+    required: yes
+  - id: uppercase
+    type: text
+    autocomplete: true
+    pattern: \[A-Z\]\* 
+    placeholder: Uppercase only
+    required: yes

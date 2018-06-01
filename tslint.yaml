@@ -8,4 +8,6 @@ rules:
   typedef-whitespace: [true, {'call-signature': 'onespace', 'index-signature': 'onespace', 'parameter': 'onespace', 'property-declaration': 'onespace', 'variable-declaration': 'onespace'}]
   semicolon: [true, 'always', 'ignore-interfaces']
   variable-name: [true, "ban-keywords", "allow-leading-underscore"]
+  max-line-length: [true, 150]
+  object-literal-sort-keys: false
 ...

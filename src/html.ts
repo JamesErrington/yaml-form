@@ -1,4 +1,6 @@
-function makeMeta(schema : string[], definition : IFormMeta, config? : IConfig) : string {
+import { schemas } from './utils';
+
+function makeAttributeString(schema : string[], definition : IHTMLElement, required? : string[]) : string {
   let text = '';
   for(const attribute of schema) {
     // @ts-ignore: we are checking for undefined already
@@ -8,11 +10,39 @@ function makeMeta(schema : string[], definition : IFormMeta, config? : IConfig) 
       continue;
     }
     // If this attribute is required we need to throw an error
-    if(config && (config.required.form.indexOf(attribute) !== -1)) {
+    if(required && required.indexOf(attribute) !== -1) {
       throw new Error(`Undefined required attribute '${attribute}'`);
     }
   }
   return text;
 }
 
-export { makeMeta };
+function makeFormTag(definition : IFormElement) : string {
+  const attributes = makeAttributeString(schemas.formMetaSchema(), definition);
+  const html = `<form${attributes}>\n`;
+  return html;
+}
+
+function makeInputTag(definition : ITextInputElement) : string {
+  let html = '';
+  if(definition.label && definition.id) {
+    html += `<label for="${definition.id}">${definition.label}</label>\n`;
+  } else if(definition.label) {
+    throw new Error(`<input> must have attribute 'id' to add <label>`);
+  }
+  const attributes = makeAttributeString(schemas.textInputSchema(), definition);
+  html += `<input${attributes}>\n`;
+  return html;
+}
+
+function makeForm(definition : IForm) : string {
+  let html = '';
+  html += makeFormTag(definition.form_meta);
+  for(const element of definition.body) {
+    html += `\t${makeInputTag(element)}`;
+  }
+  html += '</form>';
+  return html;
+}
+
+export { makeAttributeString, makeFormTag, makeInputTag, makeForm };

@@ -1,13 +1,40 @@
+html-element:
+  id: string
+  name: string
+  class: string
+
+form:
+  form-meta
+  body
+
 form-meta:
   accept-charset: string
   action *:       string
   autocomplete:   "on" | "off"
   enctype:        "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain"
   method *:       "get" | "post"
-  name:           string
   novalidate:     boolean
   target:         "_self" | "_blank" | "_parent" | "_top" | string
 
+body: [element]
 
-form:
-  form-meta
+element: input-element | label-element
+
+input-element: text-input
+
+text-input:
+  type: "text"
+  autocomplete: string
+  list: string
+  maxLength: string
+  minLength: number
+  pattern: string
+  placeholder: string
+  required: string
+  value: string
+
+label-element:
+  for: string
+  text: string
+  
+  
