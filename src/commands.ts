@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-import {writeForm} from './app';
-const program = require('commander');
+import program from 'commander';
+import { writeForm } from './app';
 
 program
   .arguments('<file>')
   .action((file : string) => {
-    writeForm(file)
+    writeForm(file);
   })
   .parse(process.argv);

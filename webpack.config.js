@@ -3,12 +3,9 @@ const TSLintPlugin = require('tslint-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: {
-    app: './src/app.ts',
-    commands: './src/commands.ts'
-  },
+  entry: './src/commands.ts',
   output: {
-    filename: '[name].js',
+    filename: 'commands.js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {

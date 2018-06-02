@@ -1,7 +1,9 @@
 <form name="form" action="action.php" method="get" target="_self">
-	<input id="lowercase" type="text" pattern="\[a-z\]\*" placeholder="Lowercase only" required="yes">
+	<label for="lowercase">Type text</label>
+	<input id="lowercase" type="text" pattern="\[a-z\]\*" placeholder="Lowercase only" required="yes"><br />
 	<div id="radio-group">
 		<input id="undefined" name="undefined" type="radio" value="">
-		<label for="undefined">Option 1</label>
+		<label for="undefined">Option 1</label><br />
 	</div>
+	<input type="submit" value="Submit">
 </form>

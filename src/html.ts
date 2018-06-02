@@ -30,7 +30,7 @@ function makeInputTag(definition : ITextInput) : string {
   } else if(definition.label) {
     throw new Error(`<input> must have attribute 'id' to add <label>`);
   }
-  html += `<input${makeAttributeString(schemas.textInputSchema(), definition)}>`;
+  html += `<input${makeAttributeString(schemas.textInputSchema(), definition)}><br />`;
   return html;
 }
 
@@ -38,7 +38,7 @@ function makeRadioGroup(definition : IRadioGroup) : string {
   let html = definition.id ? `<div id="${definition.id}">\n` : '<div>\n';
   for(const choice of definition.choices) {
     html += `\t<input id="${choice.id}" name="${definition.name}" type="${definition.type}" value="${choice.value}">\n`;
-    html += `\t<label for="${choice.id}">${choice.label}</label>\n`;
+    html += `\t<label for="${choice.id}">${choice.label}</label><br />\n`;
   }
   html += `</div>`;
 

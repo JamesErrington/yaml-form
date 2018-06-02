@@ -9,8 +9,11 @@ body:
     pattern: \[a-z\]\* 
     placeholder: Lowercase only
     required: yes
+    label: 'Type text'
   - id: radio-group
     type: radio
     choices: 
       - label: 'Option 1'
         value: ''
+  - type: 'submit'
+    label: 'Submit'

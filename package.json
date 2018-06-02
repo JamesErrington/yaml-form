@@ -1,8 +1,8 @@
 {
   "name": "yaml-form",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Create form html from yaml configs",
-  "main": "dist/app.js",
+  "main": "dist/commands.js",
   "scripts": {
     "test": "webpack && mocha -r ts-node/register tests/*.spec.ts",
     "build": "webpack",
@@ -15,7 +15,7 @@
   "author": "James Errington",
   "license": "ISC",
   "bin": {
-    "form": "dist/commands.js"
+    "yamlform": "dist/commands.js"
   },
   "bugs": {
     "url": "https://github.com/JamesErrington/yaml-form/issues"

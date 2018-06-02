@@ -94,7 +94,7 @@ describe('makeInputTag()', () => {
         required: 'yes'
       };
       const result = makeInputTag(definition);
-      const expected = '<input id="lowercase" type="text" pattern="[a-z]*" placeholder="Lowercase only" required="yes">';
+      const expected = '<input id="lowercase" type="text" pattern="[a-z]*" placeholder="Lowercase only" required="yes"><br />';
 
       expect(result).to.equal(expected);
     });
@@ -112,7 +112,7 @@ describe('makeInputTag()', () => {
       };
       const result = makeInputTag(definition);
       const expected = '<label for="lowercase">Type text</label>\n' +
-        '<input id="lowercase" type="text" pattern="[a-z]*" placeholder="Lowercase only" required="yes">';
+        '<input id="lowercase" type="text" pattern="[a-z]*" placeholder="Lowercase only" required="yes"><br />';
 
       expect(result).to.equal(expected);
     });
@@ -152,8 +152,8 @@ describe('makeRadioGroup()', () => {
       };
       const result = makeRadioGroup(definition);
       const expected = '<div id="radio-group">\n\t<input id="option-one" name="options" type="radio" value="one">\n' +
-        '\t<label for="option-one">Option 1</label>\n\t<input id="option-two" name="options" type="radio" value="two">\n' +
-        '\t<label for="option-two">Option 2</label>\n</div>';
+        '\t<label for="option-one">Option 1</label><br />\n\t<input id="option-two" name="options" type="radio" value="two">\n' +
+        '\t<label for="option-two">Option 2</label><br />\n</div>';
 
       expect(result).to.equal(expected);
     });
@@ -210,12 +210,12 @@ describe('makeForm()', () => {
       };
       const result = makeForm(definition);
       const expected = '<form name="form" action="action.php" method="get" novalidate="false">\n' +
-        '\t<input id="lowercase" type="text" pattern="[a-z]*" placeholder="Lowercase only" required="yes">\n' +
+        '\t<input id="lowercase" type="text" pattern="[a-z]*" placeholder="Lowercase only" required="yes"><br />\n' +
         '\t<div id="radio-group">\n' +
         '\t\t<input id="option-one" name="options" type="radio" value="one">\n' +
-        '\t\t<label for="option-one">Option 1</label>\n' +
+        '\t\t<label for="option-one">Option 1</label><br />\n' +
         '\t\t<input id="option-two" name="options" type="radio" value="two">\n' +
-        '\t\t<label for="option-two">Option 2</label>\n' +
+        '\t\t<label for="option-two">Option 2</label><br />\n' +
         '\t</div>\n' +
         '\t<input type="submit" value="Submit">\n' +
         '</form>';

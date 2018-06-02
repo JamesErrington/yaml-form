@@ -1,4 +1,0 @@
-required:
-  form:
-    action: true
-    method: true
