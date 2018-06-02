@@ -1,16 +1,10 @@
 declare interface IForm {
-  form_meta : IFormElement
-  body : IInputElement[]
+  form_meta : IFormMeta
+  body : IFormElement[]
 }
 
-declare interface IHTMLElement {
-  id? : string
-  class? : string
-  style? : string
-  name? : string
-}
-
-declare interface IFormElement extends IHTMLElement {
+declare interface IFormMeta extends ICommon {
+  type : 'meta'
   accept_charset? : string
   action? : string
   autocomplete? : string
@@ -20,11 +14,15 @@ declare interface IFormElement extends IHTMLElement {
   target? : string
 }
 
-declare interface IInputElement extends IHTMLElement {
-  type? : string
+declare type IFormElement = ITextInput | IRadioGroup | ISumbitInput | IFormMeta;
+
+declare interface ICommon {
+  id? : string
+  name? : string
 }
 
-declare interface ITextInputElement extends IInputElement {
+declare interface ITextInput extends ICommon {
+  type : 'text'
   autocomplete? : string
   list? : string
   maxLength? : string
@@ -36,21 +34,18 @@ declare interface ITextInputElement extends IInputElement {
   label? : string
 }
 
-declare interface IRadioGroup {
-  id? : string
-  name : string
-  type : string
-  choices : IRadioChoices[]
+declare interface IRadioGroup extends ICommon {
+  type : 'radio'
+  choices : IRadioChoice[]
 }
 
-declare interface IRadioChoices {
+declare interface IRadioChoice {
   id : string
-  label : string
-  value : string
+  label? : string
+  value? : string
 }
 
-declare interface IConfig {
-  required : {
-    form : string[]
-  };
+declare interface ISumbitInput extends ICommon {
+  type : 'submit'
+  label? : string
 }

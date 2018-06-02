@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
-import { makeAttributeString, makeForm, makeFormTag, makeInputTag, makeRadioGroup } from '../src/html';
+import { makeAttributeString, makeForm, makeFormTag, makeInputTag, makeRadioGroup, makeSubmitInput } from '../src/html';
 
 const globalSchema = ['id', 'name', 'class'];
 const formMetaSchema = ['accept_charset', 'action', 'autocomplete', 'enctype', 'method', 'novalidate', 'target'];
@@ -8,8 +8,9 @@ const formMetaSchema = ['accept_charset', 'action', 'autocomplete', 'enctype', '
 describe('makeAttributeString()', () => {
   describe('Make full attribute string', () => {
     it('should return a string of attributes as per the given full definition', () => {
-      const definition = {
+      const definition : IFormMeta = {
         name: 'form',
+        type: 'meta',
         accept_charset: 'utf-8',
         action: 'action.php',
         autocomplete: 'on',
@@ -29,8 +30,9 @@ describe('makeAttributeString()', () => {
 
   describe('Make selected attribute string', () => {
     it('should return a string of attributes as per the given part definition', () => {
-      const definition = {
+      const definition : IFormMeta = {
         name: 'form',
+        type: 'meta',
         accept_charset: '',
         action: 'action.php',
         autocomplete: '',
@@ -49,8 +51,9 @@ describe('makeAttributeString()', () => {
 
   describe('Throw error on missing required attribute', () => {
     it('should throw an error if a required attribute is not in the given definition', () => {
-      const definition = {
+      const definition : IFormMeta = {
         name: 'form',
+        type: 'meta',
         action: 'action.php',
         method: ''
       };
@@ -65,7 +68,8 @@ describe('makeAttributeString()', () => {
 describe('makeFormTag()', () => {
   describe('Make html form tag', () => {
     it('should return a string of a html form with the attributes defined in the given definition', () => {
-      const definition = {
+      const definition : IFormMeta = {
+        type: 'meta',
         action: 'action.php',
         method: 'get',
         name: 'form',
@@ -82,7 +86,7 @@ describe('makeFormTag()', () => {
 describe('makeInputTag()', () => {
   describe('Make html input tag', () => {
     it('should return a string of a html text input with the attributes defined in the given definition', () => {
-      const definition = {
+      const definition : ITextInput = {
         id: 'lowercase',
         type: 'text',
         pattern: '[a-z]*',
@@ -90,7 +94,7 @@ describe('makeInputTag()', () => {
         required: 'yes'
       };
       const result = makeInputTag(definition);
-      const expected = '<input id="lowercase" type="text" pattern="[a-z]*" placeholder="Lowercase only" required="yes">\n';
+      const expected = '<input id="lowercase" type="text" pattern="[a-z]*" placeholder="Lowercase only" required="yes">';
 
       expect(result).to.equal(expected);
     });
@@ -98,7 +102,7 @@ describe('makeInputTag()', () => {
 
   describe('Make html input tag with label', () => {
     it('should return a string of a html label and text input with the attributes defined in the given definition', () => {
-      const definition = {
+      const definition : ITextInput = {
         id: 'lowercase',
         type: 'text',
         pattern: '[a-z]*',
@@ -108,7 +112,7 @@ describe('makeInputTag()', () => {
       };
       const result = makeInputTag(definition);
       const expected = '<label for="lowercase">Type text</label>\n' +
-        '<input id="lowercase" type="text" pattern="[a-z]*" placeholder="Lowercase only" required="yes">\n';
+        '<input id="lowercase" type="text" pattern="[a-z]*" placeholder="Lowercase only" required="yes">';
 
       expect(result).to.equal(expected);
     });
@@ -116,7 +120,7 @@ describe('makeInputTag()', () => {
 
   describe('No id on input with label', () => {
     it('should throw an error if the input does not have id for the label', () => {
-      const definition = {
+      const definition : ITextInput = {
         type: 'text',
         pattern: '[a-z]*',
         placeholder: 'Lowercase only',
@@ -131,8 +135,8 @@ describe('makeInputTag()', () => {
 
 describe('makeRadioGroup()', () => {
   describe('Make a group of radio buttons with labels', () => {
-    it('should return a string of a html radio button group with labels as defined oin the given definition', () => {
-      const definition = {
+    it('should return a string of a html radio button group with labels as defined in the given definition', () => {
+      const definition : IRadioGroup = {
         id: 'radio-group',
         name: 'options',
         type: 'radio',
@@ -156,11 +160,25 @@ describe('makeRadioGroup()', () => {
   });
 });
 
+describe('makeSubmitButton()', () => {
+  describe('Make html submit input', () => {
+    it('should return a string of a html submit input with the attributes defined in the given definition', () => {
+      const definition : ISumbitInput = {
+        type: 'submit',
+        label: 'Submit'
+      };
+      const result = makeSubmitInput(definition);
+      const expected = '<input type="submit" value="Submit">';
+    });
+  });
+});
+
 describe('makeForm()', () => {
   describe('Make a form', () => {
     it('should return a string of a html form with the given attributes and body', () => {
-      const definition = {
+      const definition : IForm = {
         form_meta: {
+          type: 'meta',
           action: 'action.php',
           method: 'get',
           name: 'form',
@@ -172,11 +190,34 @@ describe('makeForm()', () => {
           pattern: '[a-z]*',
           placeholder: 'Lowercase only',
           required: 'yes'
+        }, {
+          id: 'radio-group',
+          name: 'options',
+          type: 'radio',
+          choices: [{
+            id: 'option-one',
+            label: 'Option 1',
+            value: 'one'
+          }, {
+            id: 'option-two',
+            label: 'Option 2',
+            value: 'two'
+          }]
+        }, {
+          type: 'submit',
+          label: 'Submit'
         }]
       };
       const result = makeForm(definition);
       const expected = '<form name="form" action="action.php" method="get" novalidate="false">\n' +
         '\t<input id="lowercase" type="text" pattern="[a-z]*" placeholder="Lowercase only" required="yes">\n' +
+        '\t<div id="radio-group">\n' +
+        '\t\t<input id="option-one" name="options" type="radio" value="one">\n' +
+        '\t\t<label for="option-one">Option 1</label>\n' +
+        '\t\t<input id="option-two" name="options" type="radio" value="two">\n' +
+        '\t\t<label for="option-two">Option 2</label>\n' +
+        '\t</div>\n' +
+        '\t<input type="submit" value="Submit">\n' +
         '</form>';
 
       expect(result).to.equal(expected);

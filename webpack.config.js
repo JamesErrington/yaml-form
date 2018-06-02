@@ -3,15 +3,21 @@ const TSLintPlugin = require('tslint-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.ts',
+  entry: {
+    app: './src/app.ts',
+    commands: './src/commands.ts'
+  },
   output: {
-    filename: 'app.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
     rules: [{
       test: /\.ts$/,
-      use: 'ts-loader',
+      use: [
+        'ts-loader',
+        'shebang-loader'
+      ],
       exclude: /node_modules/
     }]
   },

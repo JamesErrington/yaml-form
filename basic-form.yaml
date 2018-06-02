@@ -9,12 +9,6 @@ body:
     pattern: \[a-z\]\* 
     placeholder: Lowercase only
     required: yes
-  - id: uppercase
-    type: text
-    autocomplete: true
-    pattern: \[A-Z\]\* 
-    placeholder: Uppercase only
-    required: yes
   - id: radio-group
     type: radio
     choices: 

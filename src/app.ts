@@ -1,5 +1,27 @@
-// import * as fs from 'fs';
-// import * as yamlParse from 'js-yaml';
+import * as fs from 'fs';
+import * as yamlParse from 'js-yaml';
+import { makeForm } from './html';
+
+function writeHTML(html : string) : void {
+  fs.writeFileSync('basic-form.html', html, {
+    encoding: 'utf-8'
+  });
+}
+
+function getFormDef(path : string) : IForm {
+  const file = yamlParse.safeLoad(fs.readFileSync(path, 'utf-8'));
+  return JSON.parse(JSON.stringify(file));
+}
+
+function writeForm(path : string) : void {
+  const formDef = getFormDef(path);
+
+  const form = makeForm(formDef);
+
+  writeHTML(form);
+}
+
+export {writeForm};
 
 /*
 interface IFormSchema {
@@ -44,14 +66,9 @@ function getConfig(path : string) : IConfig {
   return convertToConfig(file);
 }
 
-function getFormDef(path : string) : IFormDef {
-  const file = yamlParse.safeLoad(fs.readFileSync(path, 'utf-8'));
-  return convertToFormDef(file);
-}
 
-function convertToFormDef(file : yamlParse.DocumentLoadResult) : IFormDef {
-  return JSON.parse(JSON.stringify(file));
-}
+
+
 
 function convertToConfig(file : yamlParse.DocumentLoadResult) : IConfig {
   return JSON.parse(JSON.stringify(file));
@@ -61,11 +78,7 @@ function convertToSchema(file : yamlParse.DocumentLoadResult) : IFormSchema {
   return JSON.parse(JSON.stringify(file));
 }
 
-function writeHTML(html : string) : void {
-  fs.writeFileSync('basic-form.html', html, {
-    encoding: 'utf-8'
-  });
-}
+
 
 function makeMeta(meta_schema : string[], meta_def : IFormMeta) : string {
   let string = '';
@@ -91,7 +104,5 @@ const schema = getSchema('./schema/formschema.yaml');
 
 const config = getConfig('./yamlform.config.yaml');
 
-const formDef = getFormDef('./basic-form.yaml');
 
-makeForm(formDef);
 */

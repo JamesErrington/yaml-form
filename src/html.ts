@@ -1,6 +1,6 @@
 import { schemas } from './utils';
 
-function makeAttributeString(schema : string[], definition : IHTMLElement, required? : string[]) : string {
+function makeAttributeString(schema : string[], definition : IFormElement, required? : string[]) : string {
   let text = '';
   for(const attribute of schema) {
     // @ts-ignore: we are checking for undefined already
@@ -17,21 +17,20 @@ function makeAttributeString(schema : string[], definition : IHTMLElement, requi
   return text;
 }
 
-function makeFormTag(definition : IFormElement) : string {
+function makeFormTag(definition : IFormMeta) : string {
   const attributes = makeAttributeString(schemas.formMetaSchema(), definition);
   const html = `<form${attributes}>\n`;
   return html;
 }
 
-function makeInputTag(definition : ITextInputElement) : string {
+function makeInputTag(definition : ITextInput) : string {
   let html = '';
   if(definition.label && definition.id) {
     html += `<label for="${definition.id}">${definition.label}</label>\n`;
   } else if(definition.label) {
     throw new Error(`<input> must have attribute 'id' to add <label>`);
   }
-  const attributes = makeAttributeString(schemas.textInputSchema(), definition);
-  html += `<input${attributes}>\n`;
+  html += `<input${makeAttributeString(schemas.textInputSchema(), definition)}>`;
   return html;
 }
 
@@ -46,14 +45,30 @@ function makeRadioGroup(definition : IRadioGroup) : string {
   return html;
 }
 
+function makeSubmitInput(definition : ISumbitInput) : string {
+
+  const html = `<input type="${definition.type}" value="${definition.label}">`;
+  return html;
+}
+
 function makeForm(definition : IForm) : string {
   let html = '';
   html += makeFormTag(definition.form_meta);
   for(const element of definition.body) {
-    html += `\t${makeInputTag(element)}`;
+    switch(element.type) {
+      case 'text':
+        html += `\t${makeInputTag(element).replace(/\n/g, '\n\t')}\n`;
+        break;
+      case 'radio':
+        html += `\t${makeRadioGroup(element).replace(/\n/g, '\n\t')}\n`;
+        break;
+      case 'submit':
+        html += `\t${makeSubmitInput(element).replace(/\n/g, '\n\t')}\n`;
+        break;
+    }
   }
   html += '</form>';
   return html;
 }
 
-export { makeAttributeString, makeFormTag, makeInputTag, makeRadioGroup, makeForm };
+export { makeAttributeString, makeFormTag, makeInputTag, makeRadioGroup, makeSubmitInput, makeForm };
