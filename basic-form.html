@@ -1,9 +1,11 @@
 <form name="form" action="action.php" method="get" target="_self">
-	<label for="lowercase">Type text</label>
-	<input id="lowercase" type="text" pattern="\[a-z\]\*" placeholder="Lowercase only" required="yes"><br />
-	<div id="radio-group">
-		<input id="undefined" name="undefined" type="radio" value="">
-		<label for="undefined">Option 1</label><br />
-	</div>
+	<div id="checkbox-group">
+		<input id="checkbox-one" name="undefined" type="checkbox" value="one">
+		<label for="checkbox-one">Option 1</label><br />
+		<input id="checkbox-two" name="undefined" type="checkbox" value="two">
+		<label for="checkbox-two">Option 2</label><br />
+	</div><br />
+	<label for="date-input">Select date</label>
+	<input id="date-input" type="date"><br />
 	<input type="submit" value="Submit">
 </form>

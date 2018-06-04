@@ -14,7 +14,7 @@ declare interface IFormMeta extends ICommon {
   target? : string
 }
 
-declare type IFormElement = ITextInput | IRadioGroup | ISumbitInput | IFormMeta;
+declare type IFormElement = ITextInput | IDateInput | IChoiceGroup | ISumbitInput | IFormMeta;
 
 declare interface ICommon {
   id? : string
@@ -34,12 +34,22 @@ declare interface ITextInput extends ICommon {
   label? : string
 }
 
-declare interface IRadioGroup extends ICommon {
-  type : 'radio'
-  choices : IRadioChoice[]
+declare interface IDateInput extends ICommon {
+  type : 'date'
+  max? : string
+  min? : string
+  pattern? : string
+  required? : string
+  value? : string
+  label? : string
 }
 
-declare interface IRadioChoice {
+declare interface IChoiceGroup extends ICommon {
+  type : 'radio' | 'checkbox'
+  choices : IChoice[]
+}
+
+declare interface IChoice {
   id : string
   label? : string
   value? : string

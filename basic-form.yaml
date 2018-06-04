@@ -4,16 +4,17 @@ form_meta:
   name: "form"
   target: "_self"
 body:
-  - id: lowercase
-    type: text 
-    pattern: \[a-z\]\* 
-    placeholder: Lowercase only
-    required: yes
-    label: 'Type text'
-  - id: radio-group
-    type: radio
+  - id: checkbox-group
+    type: checkbox
     choices: 
-      - label: 'Option 1'
-        value: ''
+      - id: 'checkbox-one'
+        label: 'Option 1'
+        value: 'one'
+      - id: 'checkbox-two'
+        label: 'Option 2'
+        value: 'two'
+  - type: date
+    id: 'date-input'
+    label: 'Select date'
   - type: 'submit'
     label: 'Submit'

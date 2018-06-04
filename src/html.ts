@@ -34,13 +34,24 @@ function makeInputTag(definition : ITextInput) : string {
   return html;
 }
 
-function makeRadioGroup(definition : IRadioGroup) : string {
+function makeDateInput(definition : IDateInput) : string {
+  let html = '';
+  if(definition.label && definition.id) {
+    html += `<label for="${definition.id}">${definition.label}</label>\n`;
+  } else if(definition.label) {
+    throw new Error(`<input> must have attribute 'id' to add <label>`);
+  }
+  html += `<input${makeAttributeString(schemas.dateInputSchema(), definition)}><br />`;
+  return html;
+}
+
+function makeChoiceGroup(definition : IChoiceGroup) : string {
   let html = definition.id ? `<div id="${definition.id}">\n` : '<div>\n';
   for(const choice of definition.choices) {
     html += `\t<input id="${choice.id}" name="${definition.name}" type="${definition.type}" value="${choice.value}">\n`;
     html += `\t<label for="${choice.id}">${choice.label}</label><br />\n`;
   }
-  html += `</div>`;
+  html += `</div><br />`;
 
   return html;
 }
@@ -60,7 +71,11 @@ function makeForm(definition : IForm) : string {
         html += `\t${makeInputTag(element).replace(/\n/g, '\n\t')}\n`;
         break;
       case 'radio':
-        html += `\t${makeRadioGroup(element).replace(/\n/g, '\n\t')}\n`;
+      case 'checkbox':
+        html += `\t${makeChoiceGroup(element).replace(/\n/g, '\n\t')}\n`;
+        break;
+      case 'date':
+        html += `\t${makeDateInput(element).replace(/\n/g, '\n\t')}\n`;
         break;
       case 'submit':
         html += `\t${makeSubmitInput(element).replace(/\n/g, '\n\t')}\n`;
@@ -71,4 +86,4 @@ function makeForm(definition : IForm) : string {
   return html;
 }
 
-export { makeAttributeString, makeFormTag, makeInputTag, makeRadioGroup, makeSubmitInput, makeForm };
+export { makeAttributeString, makeChoiceGroup, makeDateInput, makeForm, makeFormTag, makeInputTag, makeSubmitInput };

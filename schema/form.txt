@@ -36,5 +36,14 @@ text-input:
 label-element:
   for: string
   text: string
+
+date:
+  type: 'date'
+  max
+  min
+  pattern
+  required
+  value
+
   
   

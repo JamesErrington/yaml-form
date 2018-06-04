@@ -1,6 +1,6 @@
 {
   "name": "yaml-form",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Create form html from yaml configs",
   "main": "dist/commands.js",
   "scripts": {
