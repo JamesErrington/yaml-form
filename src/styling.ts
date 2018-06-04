@@ -12,4 +12,18 @@ function makeInputTagBootstrap(definition : ITextInput) : string {
   return html;
 }
 
-export { makeInputTagBootstrap };
+function makeChoiceGroupBootstrap(definition : IChoiceGroup) : string {
+  let html = definition.id ? `<div id="${definition.id}">\n` : '<div>\n';
+  for(const choice of definition.choices) {
+    html += '\t<div class="form-check">\n'
+    html += `\t\t<input class="form-check-input" id="${choice.id}" name="${definition.name}" type="${definition.type}" value="${choice.value}">\n`;
+    html += `\t\t<label class="form-check-label" for="${choice.id}">${choice.label}</label><br />\n`;
+    html += '\t</div>\n';
+  }
+  html += `</div>`;
+
+  console.log(html);
+  return html;
+}
+
+export { makeChoiceGroupBootstrap, makeInputTagBootstrap };

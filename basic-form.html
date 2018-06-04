@@ -1,7 +1,13 @@
 <form name="form" action="action.php" method="get" target="_self">
-	<div class="form-group">
-		<label for="lowercase">Type text:</label>
-		<input class="form-control" id="lowercase" type="text" pattern="[a-z]*" required="yes">
-	</div>
+	<div id="radio-group">
+		<div class="form-check">
+			<input class="form-check-input" id="radio-one" name="radios" type="radio" value="one">
+			<label class="form-check-label" for="radio-one">Option 1</label><br />
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" id="radio-two" name="radios" type="radio" value="two">
+			<label class="form-check-label" for="radio-two">Option 2</label><br />
+		</div>
+</div>
 </form>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
