@@ -1,11 +1,7 @@
 <form name="form" action="action.php" method="get" target="_self">
-	<div id="checkbox-group">
-		<input id="checkbox-one" name="undefined" type="checkbox" value="one">
-		<label for="checkbox-one">Option 1</label><br />
-		<input id="checkbox-two" name="undefined" type="checkbox" value="two">
-		<label for="checkbox-two">Option 2</label><br />
-	</div><br />
-	<label for="date-input">Select date</label>
-	<input id="date-input" type="date"><br />
-	<input type="submit" value="Submit">
+	<div class="form-group">
+		<label for="lowercase">Type text:</label>
+		<input class="form-control" id="lowercase" type="text" pattern="[a-z]*" required="yes">
+	</div>
 </form>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
