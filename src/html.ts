@@ -1,3 +1,4 @@
+/*
 import { schemas } from './utils';
 
 function makeAttributeString(schema : string[], definition : IFormElement, required? : string[]) : string {
@@ -87,3 +88,4 @@ function makeForm(definition : IForm) : string {
 }
 
 export { makeAttributeString, makeChoiceGroup, makeDateInput, makeForm, makeFormTag, makeInputTag, makeSubmitInput };
+*/

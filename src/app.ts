@@ -1,3 +1,4 @@
+/*
 import * as fs from 'fs';
 import * as yamlParse from 'js-yaml';
 import { makeForm } from './html';
@@ -22,3 +23,4 @@ function writeForm(path : string) : void {
 }
 
 export {writeForm};
+*/

@@ -45,5 +45,28 @@ date:
   required
   value
 
-  
+
+
+
+form:
+  form_meta
+  body
+
+common:
+  id
+  class
+  name
+
+form_meta:
+  action
+  method
+  target
+
+body: form_element[]
+
+form_element = text_input
+
+text_input:
+  type: 'text'
+  label: string
   

@@ -3,15 +3,68 @@ declare interface IForm {
   body : IFormElement[]
 }
 
+declare interface IFormMeta {
+  id : string
+  class : string
+  action : string
+  method : string
+  target : string
+  // options
+}
+
+declare type IFormElement = ITextInput | IPasswordInput | IEmailInput;
+
+declare interface ITextInput {
+  type : 'text'
+  id : string
+  class : string
+  name : string
+  label : string
+  // options
+}
+
+declare interface IPasswordInput {
+  type : 'password'
+  id : string
+  class : string
+  name : string
+  label : string
+  // options
+}
+
+declare interface IEmailInput {
+  type : 'email'
+  id : string
+  class : string
+  name : string
+  label : string
+  // options
+}
+
+declare interface IDateInput {
+  type : 'date'
+  id : string
+  class : string
+  name : string
+  label : string
+  // options
+}
+
+/*
+declare interface IForm {
+  form_meta : IFormMeta
+  body : IFormElement[]
+}
+
 declare interface IFormMeta extends ICommon {
   type : 'meta'
   accept_charset? : string
-  action? : string
+
   autocomplete? : string
   enctype? : string
-  method? : string
+
   novalidate? : string
-  target? : string
+
 }
 
 declare type IFormElement = ITextInput | IDateInput | IChoiceGroup | ISumbitInput | IFormMeta;
@@ -59,3 +112,4 @@ declare interface ISumbitInput extends ICommon {
   type : 'submit'
   label? : string
 }
+*/
