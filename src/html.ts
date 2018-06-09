@@ -1,91 +1,59 @@
-/*
-import { schemas } from './utils';
+export function makeForm(definition : IForm) : string {
+  let html = makeFormTag(definition.meta);
 
-function makeAttributeString(schema : string[], definition : IFormElement, required? : string[]) : string {
-  let text = '';
-  for(const attribute of schema) {
-    // @ts-ignore: we are checking for undefined already
-    const value = definition[attribute];
-    if(value) {
-      text += ` ${attribute.replace('_', '-')}="${value}"`;
-      continue;
-    }
-    // If this attribute is required we need to throw an error
-    if(required && required.indexOf(attribute) !== -1) {
-      throw new Error(`Undefined required attribute '${attribute}'`);
-    }
-  }
-  return text;
-}
-
-function makeFormTag(definition : IFormMeta) : string {
-  const attributes = makeAttributeString(schemas.formMetaSchema(), definition);
-  const html = `<form${attributes}>\n`;
-  return html;
-}
-
-function makeInputTag(definition : ITextInput) : string {
-  let html = '';
-  if(definition.label && definition.id) {
-    html += `<label for="${definition.id}">${definition.label}</label>\n`;
-  } else if(definition.label) {
-    throw new Error(`<input> must have attribute 'id' to add <label>`);
-  }
-  html += `<input${makeAttributeString(schemas.textInputSchema(), definition)}><br />`;
-  return html;
-}
-
-function makeDateInput(definition : IDateInput) : string {
-  let html = '';
-  if(definition.label && definition.id) {
-    html += `<label for="${definition.id}">${definition.label}</label>\n`;
-  } else if(definition.label) {
-    throw new Error(`<input> must have attribute 'id' to add <label>`);
-  }
-  html += `<input${makeAttributeString(schemas.dateInputSchema(), definition)}><br />`;
-  return html;
-}
-
-function makeChoiceGroup(definition : IChoiceGroup) : string {
-  let html = definition.id ? `<div id="${definition.id}">\n` : '<div>\n';
-  for(const choice of definition.choices) {
-    html += `\t<input id="${choice.id}" name="${definition.name}" type="${definition.type}" value="${choice.value}">\n`;
-    html += `\t<label for="${choice.id}">${choice.label}</label><br />\n`;
-  }
-  html += `</div><br />`;
-
-  return html;
-}
-
-function makeSubmitInput(definition : ISumbitInput) : string {
-
-  const html = `<input type="${definition.type}" value="${definition.label}">`;
-  return html;
-}
-
-function makeForm(definition : IForm) : string {
-  let html = '';
-  html += makeFormTag(definition.form_meta);
   for(const element of definition.body) {
     switch(element.type) {
       case 'text':
-        html += `\t${makeInputTag(element).replace(/\n/g, '\n\t')}\n`;
+        html += makeTextInput(element);
         break;
-      case 'radio':
-      case 'checkbox':
-        html += `\t${makeChoiceGroup(element).replace(/\n/g, '\n\t')}\n`;
+      case 'password':
+        html += makePasswordInput(element);
+        break;
+      case 'email':
+        html += makeEmailInput(element);
         break;
       case 'date':
-        html += `\t${makeDateInput(element).replace(/\n/g, '\n\t')}\n`;
-        break;
-      case 'submit':
-        html += `\t${makeSubmitInput(element).replace(/\n/g, '\n\t')}\n`;
+        html += makeDateInput(element);
         break;
     }
   }
-  html += '</form>';
+
+  html += '\t<input type="submit">\n' +
+    '</form>\n';
   return html;
 }
 
-export { makeAttributeString, makeChoiceGroup, makeDateInput, makeForm, makeFormTag, makeInputTag, makeSubmitInput };
-*/
+export function makeFormTag(definition : IFormMeta) : string {
+  const html = `<form id="${definition.id}" action="${definition.action}"` +
+   ` method="${definition.method}" target="${definition.target}">\n`;
+
+  return html;
+}
+
+export function makeTextInput(definition : ITextInput) : string {
+  let html = `\t<label for="${definition.id}">${definition.label}</label>\n`;
+  html += `\t<input type="text" id="${definition.id}" name="${definition.name}">\n`;
+
+  return html;
+}
+
+export function makePasswordInput(definition : IPasswordInput) : string {
+  let html = `\t<label for="${definition.id}">${definition.label}</label>\n`;
+  html += `\t<input type="password" id="${definition.id}" name="${definition.name}">\n`;
+
+  return html;
+}
+
+export function makeEmailInput(definition : IEmailInput) : string {
+  let html = `\t<label for="${definition.id}">${definition.label}</label>\n`;
+  html += `\t<input type="email" id="${definition.id}" name="${definition.name}">\n`;
+
+  return html;
+}
+
+export function makeDateInput(definition : IDateInput) : string {
+  let html = `\t<label for="${definition.id}">${definition.label}</label>\n`;
+  html += `\t<input type="date" id="${definition.id}" name="${definition.name}">\n`;
+
+  return html;
+}

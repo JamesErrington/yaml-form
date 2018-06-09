@@ -1,11 +1,11 @@
-<form name="form" action="action.php" method="get" target="_self">
-	<div id="checkbox-group">
-		<input id="checkbox-one" name="undefined" type="checkbox" value="one">
-		<label for="checkbox-one">Option 1</label><br />
-		<input id="checkbox-two" name="undefined" type="checkbox" value="two">
-		<label for="checkbox-two">Option 2</label><br />
-	</div><br />
-	<label for="date-input">Select date</label>
-	<input id="date-input" type="date"><br />
-	<input type="submit" value="Submit">
+<form id="form" class="form" action="action.php" method="get" target="_self">
+	<label for="date-input">Date:</label>
+	<input type="date" id="date-input" class="date-input" name="date-input" required>
+	<label for="text-input">Text:</label>
+	<input type="text" id="text-input" class="text-input" name="text-input">
+	<label for="password-input">Password:</label>
+	<input type="password" id="password-input" class="password-input" name="password-input">
+	<label for="email-input">Email:</label>
+	<input type="email" id="email-input" class="email-input" name="email-input">
+	<input type="submit">
 </form>

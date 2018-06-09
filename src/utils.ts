@@ -1,3 +1,4 @@
+/*
 const schemas = {
   globalSchema: ['id', 'name', 'class'],
   _formMetaSchema: ['accept_charset', 'action', 'autocomplete', 'enctype', 'method', 'novalidate', 'target'],
@@ -15,3 +16,4 @@ const schemas = {
 };
 
 export { schemas };
+*/

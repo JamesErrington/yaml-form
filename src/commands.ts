@@ -1,4 +1,3 @@
-/*
 #!/usr/bin/env node
 import program from 'commander';
 import { writeForm } from './app';
@@ -9,4 +8,3 @@ program
     writeForm(file);
   })
   .parse(process.argv);
-*/

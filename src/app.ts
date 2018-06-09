@@ -1,10 +1,9 @@
-/*
 import * as fs from 'fs';
 import * as yamlParse from 'js-yaml';
 import { makeForm } from './html';
 
 function writeHTML(path : string, html : string) : void {
-  fs.writeFileSync('basic-form.html', html, {
+  fs.writeFileSync(path, html, {
     encoding: 'utf-8'
   });
 }
@@ -14,13 +13,10 @@ function getFormDef(path : string) : IForm {
   return JSON.parse(JSON.stringify(file));
 }
 
-function writeForm(path : string) : void {
+export function writeForm(path : string) : void {
   const formDef = getFormDef(path);
 
   const form = makeForm(formDef);
 
   writeHTML(path.replace('.yaml', '.html'), form);
 }
-
-export {writeForm};
-*/

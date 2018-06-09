@@ -1,20 +1,29 @@
-form_meta:
-  action: "action.php"
-  method: "get"
-  name: "form"
-  target: "_self"
+meta:
+  id: 'form'
+  action: 'action.php'
+  method: 'get'
+  class: 'form'
+  name: 'form'
+  target: '_self'
 body:
-  - id: checkbox-group
-    type: checkbox
-    choices: 
-      - id: 'checkbox-one'
-        label: 'Option 1'
-        value: 'one'
-      - id: 'checkbox-two'
-        label: 'Option 2'
-        value: 'two'
-  - type: date
+  - type: 'date'
     id: 'date-input'
-    label: 'Select date'
-  - type: 'submit'
-    label: 'Submit'
+    class: 'date-input'
+    name: 'date-input'
+    label: 'Date:'
+    required: true
+  - type: 'text'
+    id: 'text-input'
+    class: 'text-input'
+    name: 'text-input'
+    label: 'Text:'
+  - type: 'password'
+    id: 'password-input'
+    class: 'password-input'
+    name: 'password-input'
+    label: 'Password:'
+  - type: 'email'
+    id: 'email-input'
+    class: 'email-input'
+    name: 'email-input'
+    label: 'Email:'
